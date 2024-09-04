@@ -1,12 +1,12 @@
 package cn.yiming1234.wechat_auto_reply.service;
 
 /**
- * 登陆服务接口
+ * 登录服务接口
  */
 public interface ILoginService {
 
 	/**
-	 * 登陆
+	 * 登录
 	 */
 	boolean login();
 

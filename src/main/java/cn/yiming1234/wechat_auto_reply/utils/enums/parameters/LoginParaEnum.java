@@ -1,7 +1,7 @@
 package cn.yiming1234.wechat_auto_reply.utils.enums.parameters;
 
 /**
- * 登陆
+ * 登录
  * <p>
  */
 public enum LoginParaEnum {

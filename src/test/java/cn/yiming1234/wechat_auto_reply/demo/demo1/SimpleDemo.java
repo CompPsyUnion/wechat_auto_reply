@@ -4,7 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.yiming1234.wechat_auto_reply.api.MessageTools;
 import cn.yiming1234.wechat_auto_reply.api.WechatTools;
@@ -19,7 +20,7 @@ import cn.yiming1234.wechat_auto_reply.utils.tools.DownloadTools;
  * 简单示例程序，收到文本信息自动回复原信息，收到图片、语音、小视频后根据路径自动保存
  */
 public class SimpleDemo implements IMsgHandlerFace {
-	Logger LOG = Logger.getLogger(SimpleDemo.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SimpleDemo.class);
 
 	@Override
 	public String textMsgHandle(BaseMsg msg) {

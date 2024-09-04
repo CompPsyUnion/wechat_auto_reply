@@ -13,8 +13,6 @@ import okhttp3.Response;
 
 /**
  * 辅助工具类
- *
- * @date 2019年1月22日
  */
 public class AssistTools {
 	private static OkHttpClient client = new OkHttpClient();
