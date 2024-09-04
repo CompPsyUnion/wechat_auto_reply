@@ -5,16 +5,9 @@ import cn.yiming1234.wechat_auto_reply.face.IMsgHandlerFace;
 
 import java.io.File;
 
-/**
- *
- * @author https://github.com/yaphone
- * @date 创建时间：2017年4月28日 上午12:44:10
- * @version 1.0
- *
- */
 public class MyTest {
 	public static void main(String[] args) {
-		String qrPath = "D://itchat4j//login"; // 保存登陆二维码图片的路径，这里需要在本地新建目录
+		String qrPath = "D://wechat_auto_reply//login"; // 保存登陆二维码图片的路径，这里需要在本地新建目录
 		File folder = new File(qrPath);
 		if (!folder.exists()) {
 			boolean success = folder.mkdirs();

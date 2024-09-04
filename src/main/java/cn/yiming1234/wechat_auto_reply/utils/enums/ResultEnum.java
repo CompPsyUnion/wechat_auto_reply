@@ -3,7 +3,6 @@ package cn.yiming1234.wechat_auto_reply.utils.enums;
 /**
  * 返回结构枚举类
  * <p>
- * Created by xiaoxiaomo on 2017/5/6.
  */
 public enum ResultEnum {
 

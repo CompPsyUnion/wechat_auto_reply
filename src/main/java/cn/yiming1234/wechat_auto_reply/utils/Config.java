@@ -9,17 +9,12 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.OsNameEnum;
 
 /**
  * 配置信息
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年4月23日 下午2:26:21
- * @version 1.0
- *
  */
 public class Config {
 
 	public static final String API_WXAPPID = "API_WXAPPID";
 
-	public static final String picDir = "D://itchat4j";
+	public static final String picDir = "D://wechat_auto_reply";
 	public static final String VERSION = "1.2.18";
 	public static final String BASE_URL = "https://login.weixin.qq.com";
 	public static final String OS = "";
@@ -35,10 +30,6 @@ public class Config {
 
 	/**
 	 * 获取文件目录
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月8日 下午10:27:42
-	 * @return
 	 */
 	public static String getLocalPath() {
 		String localPath = null;
@@ -53,9 +44,6 @@ public class Config {
 
 	/**
 	 * 获取系统平台
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月8日 下午10:27:53
 	 */
 	public static OsNameEnum getOsNameEnum() {
 		String os = System.getProperty("os.name").toUpperCase();

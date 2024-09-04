@@ -34,12 +34,7 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.URLEnum;
 import cn.yiming1234.wechat_auto_reply.utils.enums.VerifyFriendEnum;
 
 /**
- * 消息处理类
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年4月23日 下午2:30:37
- * @version 1.0
- *
+ * 消息处理工具类
  */
 public class MessageTools {
 	private static Logger LOG = LoggerFactory.getLogger(MessageTools.class);
@@ -47,12 +42,7 @@ public class MessageTools {
 	private static MyHttpClient myHttpClient = core.getMyHttpClient();
 
 	/**
-	 * 根据UserName发送文本消息
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月4日 下午11:17:38
-	 * @param msg
-	 * @param toUserName
+	 * 发送文本消息
 	 */
 	private static void sendMsg(String text, String toUserName) {
 		if (text == null) {
@@ -64,11 +54,6 @@ public class MessageTools {
 
 	/**
 	 * 根据ID发送文本消息
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月6日 上午11:45:51
-	 * @param text
-	 * @param id
 	 */
 	public static void sendMsgById(String text, String id) {
 		if (text == null) {
@@ -79,11 +64,6 @@ public class MessageTools {
 
 	/**
 	 * 根据NickName发送文本消息
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月4日 下午11:17:38
-	 * @param text
-	 * @param nickName
 	 */
 	public static boolean sendMsgByNickName(String text, String nickName) {
 		if (nickName != null) {
@@ -99,12 +79,6 @@ public class MessageTools {
 
 	/**
 	 * 消息发送
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月23日 下午2:32:02
-	 * @param msgType
-	 * @param content
-	 * @param toUserName
 	 */
 	public static void webWxSendMsg(int msgType, String content, String toUserName) {
 		String url = String.format(URLEnum.WEB_WX_SEND_MSG.getUrl(), core.getLoginInfo().get("url"));
@@ -129,11 +103,6 @@ public class MessageTools {
 
 	/**
 	 * 上传多媒体文件到 微信服务器，目前应该支持3种类型: 1. pic 直接显示，包含图片，表情 2.video 3.doc 显示为文件，包含PDF等
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月7日 上午12:41:13
-	 * @param filePath
-	 * @return
 	 */
 	private static JSONObject webWxUploadMedia(String filePath) {
 		File f = new File(filePath);
@@ -190,18 +159,12 @@ public class MessageTools {
 			} catch (Exception e) {
 				LOG.error("webWxUploadMedia 错误： ", e);
 			}
-
 		}
 		return null;
 	}
 
 	/**
 	 * 根据NickName发送图片消息
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月7日 下午10:32:45
-	 * @param nackName
-	 * @return
 	 */
 	public static boolean sendPicMsgByNickName(String nickName, String filePath) {
 		String toUserName = WechatTools.getUserNameByNickName(nickName);
@@ -213,12 +176,6 @@ public class MessageTools {
 
 	/**
 	 * 根据用户id发送图片消息
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月7日 下午10:34:24
-	 * @param nickName
-	 * @param filePath
-	 * @return
 	 */
 	public static boolean sendPicMsgByUserId(String userId, String filePath) {
 		JSONObject responseObj = webWxUploadMedia(filePath);
@@ -233,10 +190,6 @@ public class MessageTools {
 
 	/**
 	 * 发送图片消息，内部调用
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月7日 下午10:38:55
-	 * @return
 	 */
 	private static boolean webWxSendMsgImg(String userId, String mediaId) {
 		String url = String.format("%s/webwxsendmsgimg?fun=async&f=json&pass_ticket=%s", core.getLoginInfo().get("url"),
@@ -269,12 +222,6 @@ public class MessageTools {
 
 	/**
 	 * 根据用户id发送文件
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月7日 下午11:57:36
-	 * @param userId
-	 * @param filePath
-	 * @return
 	 */
 	public static boolean sendFileMsgByUserId(String userId, String filePath) {
 		String title = new File(filePath).getName();
@@ -297,12 +244,6 @@ public class MessageTools {
 
 	/**
 	 * 根据用户昵称发送文件消息
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月10日 下午10:59:27
-	 * @param nickName
-	 * @param filePath
-	 * @return
 	 */
 	public static boolean sendFileMsgByNickName(String nickName, String filePath) {
 		String toUserName = WechatTools.getUserNameByNickName(nickName);
@@ -314,12 +255,6 @@ public class MessageTools {
 
 	/**
 	 * 内部调用
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月10日 上午12:21:28
-	 * @param userId
-	 * @param data
-	 * @return
 	 */
 	private static boolean webWxSendAppMsg(String userId, Map<String, String> data) {
 		String url = String.format("%s/webwxsendappmsg?fun=async&f=json&pass_ticket=%s", core.getLoginInfo().get("url"),
@@ -364,11 +299,6 @@ public class MessageTools {
 
 	/**
 	 * 被动添加好友
-	 * 
-	 * @date 2017年6月29日 下午10:08:43
-	 * @param msg
-	 * @param accept
-	 *            true 接受 false 拒绝
 	 */
 	public static void addFriend(BaseMsg msg, boolean accept) {
 		if (!accept) { // 不添加

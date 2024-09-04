@@ -6,9 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by xiaoxiaomo on 2017/5/7.
- */
 public enum StorageLoginInfoEnum {
 
     //URL

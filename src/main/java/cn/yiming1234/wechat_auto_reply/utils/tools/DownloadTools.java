@@ -20,11 +20,6 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.URLEnum;
 
 /**
  * 下载工具类
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年4月21日 下午11:18:46
- * @version 1.0
- *
  */
 public class DownloadTools {
 	private static Logger logger = Logger.getLogger("DownloadTools");
@@ -33,13 +28,6 @@ public class DownloadTools {
 
 	/**
 	 * 处理下载任务
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月21日 下午11:00:25
-	 * @param url
-	 * @param msgId
-	 * @param path
-	 * @return
 	 */
 	public static Object getDownloadFn(BaseMsg msg, String type, String path) {
 		Map<String, String> headerMap = new HashMap<String, String>();

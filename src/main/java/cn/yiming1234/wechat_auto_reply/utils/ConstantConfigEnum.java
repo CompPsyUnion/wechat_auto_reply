@@ -2,11 +2,6 @@ package cn.yiming1234.wechat_auto_reply.utils;
 
 /**
  * 常量
- * 
- * @author https=//github.com/yaphone
- * @date 创建时间：2017年5月5日 下午11=29=04
- * @version 1.0
- *
  */
 public class ConstantConfigEnum {
 	public static final int APPMSGTYPE_TEXT = 1;

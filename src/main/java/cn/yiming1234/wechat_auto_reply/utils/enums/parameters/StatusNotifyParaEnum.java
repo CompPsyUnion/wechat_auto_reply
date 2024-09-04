@@ -3,7 +3,6 @@ package cn.yiming1234.wechat_auto_reply.utils.enums.parameters;
 /**
  * 状态通知
  * <p>
- * Created by xiaoxiaomo on 2017/5/7.
  */
 public enum StatusNotifyParaEnum {
 

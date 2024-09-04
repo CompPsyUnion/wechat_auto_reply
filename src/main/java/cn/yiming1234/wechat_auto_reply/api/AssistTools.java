@@ -12,12 +12,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * 辅助工具类，该类暂时未用，请忽略
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年5月22日 下午10:34:46
- * @version 1.0
+ * 辅助工具类
  *
+ * @date 2019年1月22日
  */
 public class AssistTools {
 	private static OkHttpClient client = new OkHttpClient();

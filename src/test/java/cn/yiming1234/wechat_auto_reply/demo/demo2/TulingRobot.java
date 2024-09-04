@@ -22,11 +22,6 @@ import cn.yiming1234.wechat_auto_reply.utils.tools.DownloadTools;
 
 /**
  * 图灵机器人示例
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年4月24日 上午12:13:26
- * @version 1.0
- *
  */
 public class TulingRobot implements IMsgHandlerFace {
 	Logger logger = Logger.getLogger("TulingRobot");
@@ -66,7 +61,7 @@ public class TulingRobot implements IMsgHandlerFace {
 	@Override
 	public String voiceMsgHandle(BaseMsg msg) {
 		String fileName = String.valueOf(new Date().getTime());
-		String voicePath = "D://itchat4j/voice" + File.separator + fileName + ".mp3";
+		String voicePath = "D://wechat_auto_reply/voice" + File.separator + fileName + ".mp3";
 		DownloadTools.getDownloadFn(msg, MsgTypeEnum.VOICE.getType(), voicePath);
 		return "收到语音";
 	}
@@ -74,14 +69,14 @@ public class TulingRobot implements IMsgHandlerFace {
 	@Override
 	public String viedoMsgHandle(BaseMsg msg) {
 		String fileName = String.valueOf(new Date().getTime());
-		String viedoPath = "D://itchat4j/viedo" + File.separator + fileName + ".mp4";
+		String viedoPath = "D://wechat_auto_reply/viedo" + File.separator + fileName + ".mp4";
 		DownloadTools.getDownloadFn(msg, MsgTypeEnum.VIEDO.getType(), viedoPath);
 		return "收到视频";
 	}
 
 	public static void main(String[] args) {
 		IMsgHandlerFace msgHandler = new TulingRobot();
-		Wechat wechat = new Wechat(msgHandler, "D://itchat4j/login");
+		Wechat wechat = new Wechat(msgHandler, "D://wechat_auto_reply/login");
 		wechat.start();
 	}
 

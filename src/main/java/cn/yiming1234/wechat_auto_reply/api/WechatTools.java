@@ -22,11 +22,6 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.URLEnum;
 
 /**
  * 微信小工具，如获好友列表等
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年5月4日 下午10:49:16
- * @version 1.0
- *
  */
 public class WechatTools {
 	private static Logger LOG = LoggerFactory.getLogger(WechatTools.class);
@@ -35,11 +30,6 @@ public class WechatTools {
 
 	/**
 	 * 根据用户名发送文本消息
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月4日 下午10:43:14
-	 * @param msg
-	 * @param toUserName
 	 */
 	public static void sendMsgByUserName(String msg, String toUserName) {
 		MessageTools.sendMsgById(msg, toUserName);
@@ -54,11 +44,6 @@ public class WechatTools {
 	 * "@1212d3356aea8285e5bbe7b91229936bc183780a8ffa469f2d638bf0d2e4fc63"，
 	 * 可通过UserName发送消息
 	 * </p>
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月4日 下午10:56:31
-	 * @param name
-	 * @return
 	 */
 	public static String getUserNameByNickName(String nickName) {
 		for (JSONObject o : core.getContactList()) {
@@ -71,10 +56,6 @@ public class WechatTools {
 
 	/**
 	 * 返回好友昵称列表
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月4日 下午11:37:20
-	 * @return
 	 */
 	public static List<String> getContactNickNameList() {
 		List<String> contactNickNameList = new ArrayList<String>();
@@ -86,9 +67,6 @@ public class WechatTools {
 
 	/**
 	 * 返回好友完整信息列表
-	 * 
-	 * @date 2017年6月26日 下午9:45:39
-	 * @return
 	 */
 	public static List<JSONObject> getContactList() {
 		return core.getContactList();
@@ -96,10 +74,6 @@ public class WechatTools {
 
 	/**
 	 * 返回群列表
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月5日 下午9:55:21
-	 * @return
 	 */
 	public static List<JSONObject> getGroupList() {
 		return core.getGroupList();
@@ -107,9 +81,6 @@ public class WechatTools {
 
 	/**
 	 * 获取群ID列表
-	 * 
-	 * @date 2017年6月21日 下午11:42:56
-	 * @return
 	 */
 	public static List<String> getGroupIdList() {
 		return core.getGroupIdList();
@@ -117,9 +88,6 @@ public class WechatTools {
 
 	/**
 	 * 获取群NickName列表
-	 * 
-	 * @date 2017年6月21日 下午11:43:38
-	 * @return
 	 */
 	public static List<String> getGroupNickNameList() {
 		return core.getGroupNickNameList();
@@ -127,10 +95,6 @@ public class WechatTools {
 
 	/**
 	 * 根据groupIdList返回群成员列表
-	 * 
-	 * @date 2017年6月13日 下午11:12:31
-	 * @param groupId
-	 * @return
 	 */
 	public static JSONArray getMemberListByGroupId(String groupId) {
 		return core.getGroupMemeberMap().get(groupId);
@@ -138,9 +102,6 @@ public class WechatTools {
 
 	/**
 	 * 退出微信
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月18日 下午11:56:54
 	 */
 	public static void logout() {
 		webWxLogout();
@@ -172,12 +133,7 @@ public class WechatTools {
 	}
 
 	/**
-	 * 
 	 * 根据用户昵称设置备注名称
-	 * 
-	 * @date 2017年5月27日 上午12:21:40
-	 * @param userName
-	 * @param remName
 	 */
 	public static void remarkNameByNickName(String nickName, String remName) {
 		String url = String.format(URLEnum.WEB_WX_REMARKNAME.getUrl(), core.getLoginInfo().get("url"),
@@ -204,9 +160,6 @@ public class WechatTools {
 
 	/**
 	 * 获取微信在线状态
-	 * 
-	 * @date 2017年6月16日 上午12:47:46
-	 * @return
 	 */
 	public static boolean getWechatStatus() {
 		return core.isAlive();

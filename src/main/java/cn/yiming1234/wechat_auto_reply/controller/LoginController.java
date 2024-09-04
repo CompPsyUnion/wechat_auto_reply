@@ -13,11 +13,6 @@ import cn.yiming1234.wechat_auto_reply.utils.tools.CommonTools;
 
 /**
  * 登陆控制器
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年5月13日 下午12:56:07
- * @version 1.0
- *
  */
 public class LoginController {
 	private static Logger LOG = LoggerFactory.getLogger(LoginController.class);
@@ -26,7 +21,7 @@ public class LoginController {
 
 	public void login(String qrPath) {
 		if (core.isAlive()) { // 已登陆
-			LOG.info("itchat4j已登陆");
+			LOG.info("wechat_auto_reply已登陆");
 			return;
 		}
 		while (true) {

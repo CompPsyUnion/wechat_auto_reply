@@ -9,11 +9,6 @@ import cn.yiming1234.wechat_auto_reply.face.IMsgHandlerFace;
 
 /**
  * 自用的测试类，请无视
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年5月22日 下午10:41:44
- * @version 1.0
- *
  */
 public class UnusefulDemo implements IMsgHandlerFace {
 
@@ -24,7 +19,7 @@ public class UnusefulDemo implements IMsgHandlerFace {
 			if (text.equals("111")) {
 				String username = "yaphone";
 				String password = "123456";
-				String localPath = "D://itchat4j/pic/1.jpg";
+				String localPath = "D://wechat_auto_reply/pic/1.jpg";
 				String uploadUrl = "http://127.0.0.1/file/put";
 				try {
 					AssistTools.sendQrPicToServer(username, password, uploadUrl, localPath);
@@ -63,7 +58,7 @@ public class UnusefulDemo implements IMsgHandlerFace {
 
 	public static void main(String[] args) {
 		IMsgHandlerFace msgHandler = new UnusefulDemo();
-		Wechat wechat = new Wechat(msgHandler, "D://itchat4j/login");
+		Wechat wechat = new Wechat(msgHandler, "D://wechat_auto_reply/login");
 		wechat.start();
 	}
 
