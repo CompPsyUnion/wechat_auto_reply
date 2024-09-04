@@ -25,11 +25,6 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.OsNameEnum;
 
 /**
  * 常用工具类
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年4月8日 下午10:59:55
- * @version 1.0
- *
  */
 public class CommonTools {
 
@@ -84,10 +79,6 @@ public class CommonTools {
 
 	/**
 	 * 正则表达式处理工具
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月9日 上午12:27:10
-	 * @return
 	 */
 	public static Matcher getMatcher(String regEx, String text) {
 		Pattern pattern = Pattern.compile(regEx);
@@ -97,11 +88,6 @@ public class CommonTools {
 
 	/**
 	 * xml解析器
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月9日 下午6:24:25
-	 * @param text
-	 * @return
 	 */
 	public static Document xmlParser(String text) {
 		Document doc = null;
@@ -189,11 +175,6 @@ public class CommonTools {
 
 	/**
 	 * 处理emoji表情
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月23日 下午2:39:04
-	 * @param d
-	 * @param k
 	 */
 	public static void emojiFormatter(JSONObject d, String k) {
 		Matcher matcher = getMatcher("<span class=\"emoji emoji(.{1,10})\"></span>", d.getString(k));
@@ -226,11 +207,6 @@ public class CommonTools {
 
 	/**
 	 * 消息格式化
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月23日 下午4:19:08
-	 * @param d
-	 * @param k
 	 */
 	public static void msgFormatter(JSONObject d, String k) {
 		d.put(k, d.getString(k).replace("<br/>", "\n"));

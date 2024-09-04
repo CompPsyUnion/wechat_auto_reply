@@ -22,17 +22,12 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.StorageLoginInfoEnum;
 
 /**
  * 此示例演示如何获取所有好友的头像
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年6月26日 下午11:27:46
- * @version 1.0
- *
  */
 public class PicYourFriends implements IMsgHandlerFace {
 	private static Logger LOG = LoggerFactory.getLogger(PicYourFriends.class);
 	private static final Core core = Core.getInstance();
 	private static final MyHttpClient myHttpClient = core.getMyHttpClient();
-	private static final String path = "D://itchat4j//head"; // 这里需要设置保存头像的路径
+	private static final String path = "D://wechat_auto_reply//head"; // 这里需要设置保存头像的路径
 
 	@Override
 	public String textMsgHandle(BaseMsg msg) {
@@ -99,7 +94,7 @@ public class PicYourFriends implements IMsgHandlerFace {
 	}
 
 	public static void main(String[] args) {
-		String qrPath = "D://itchat4j//login"; // 保存登陆二维码图片的路径，这里需要在本地新建目录
+		String qrPath = "D://wechat_auto_reply//login"; // 保存登陆二维码图片的路径，这里需要在本地新建目录
 		IMsgHandlerFace msgHandler = new PicYourFriends(); // 实现IMsgHandlerFace接口的类
 		Wechat wechat = new Wechat(msgHandler, qrPath); // 【注入】
 		wechat.start(); // 启动服务，会在qrPath下生成一张二维码图片，扫描即可登陆，注意，二维码图片如果超过一定时间未扫描会过期，过期时会自动更新，所以你可能需要重新打开图片

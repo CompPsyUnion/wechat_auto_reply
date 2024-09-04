@@ -18,11 +18,6 @@ import cn.yiming1234.wechat_auto_reply.utils.tools.CommonTools;
 
 /**
  * 消息处理中心
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年5月14日 下午12:47:50
- * @version 1.0
- *
  */
 public class MsgCenter {
 	private static Logger LOG = LoggerFactory.getLogger(MsgCenter.class);
@@ -31,11 +26,6 @@ public class MsgCenter {
 
 	/**
 	 * 接收消息，放入队列
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月23日 下午2:30:48
-	 * @param msgList
-	 * @return
 	 */
 	public static JSONArray produceMsg(JSONArray msgList) {
 		JSONArray result = new JSONArray();
@@ -114,10 +104,6 @@ public class MsgCenter {
 
 	/**
 	 * 消息处理
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月14日 上午10:52:34
-	 * @param msgHandler
 	 */
 	public static void handleMsg(IMsgHandlerFace msgHandler) {
 		while (true) {

@@ -14,11 +14,6 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.parameters.BaseParaEnum;
 
 /**
  * 核心存储类，全局只保存一份，单例模式
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年4月23日 下午2:33:56
- * @version 1.0
- *
  */
 public class Core {
 
@@ -74,9 +69,7 @@ public class Core {
 	 */
 	public Map<String, Object> getParamMap() {
 		return new HashMap<String, Object>(1) {
-			/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
 			{

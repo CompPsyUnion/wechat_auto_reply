@@ -1,3 +1,3 @@
 # wechat_auto_reply
 
-基于itchat4j的微信自动回复机器人
+基于wechat_auto_reply的微信自动回复机器人

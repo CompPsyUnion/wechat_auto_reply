@@ -4,16 +4,9 @@ import java.io.Serializable;
 
 /**
  * RecommendInfo
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年7月3日 下午10:35:14
- * @version 1.0
- *
  */
 public class RecommendInfo implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private String ticket;

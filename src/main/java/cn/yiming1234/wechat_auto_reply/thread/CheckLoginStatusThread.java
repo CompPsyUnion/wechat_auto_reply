@@ -13,11 +13,6 @@ import cn.yiming1234.wechat_auto_reply.utils.SleepUtils;
  * 微信会有心跳包，LoginServiceImpl.syncCheck()正常在线情况下返回的消息中retcode报文应该为"0"，心跳间隔一般在25秒，
  * 那么可以通过最后收到正常报文的时间来作为判断是否在线的依据。若报文间隔大于60秒，则认为已掉线。
  * </p>
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年5月17日 下午10:53:15
- * @version 1.0
- *
  */
 public class CheckLoginStatusThread implements Runnable {
 	private static Logger LOG = LoggerFactory.getLogger(CheckLoginStatusThread.class);

@@ -3,11 +3,6 @@ package cn.yiming1234.wechat_auto_reply.utils.enums;
 
 /**
  * 消息类型枚举类
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年5月13日 下午11:53:00
- * @version 1.0
- *
  */
 public enum MsgTypeEnum {
 	TEXT("Text", "文本消息"),

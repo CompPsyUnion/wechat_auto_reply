@@ -4,16 +4,10 @@ import java.io.Serializable;
 
 /**
  * 收到的微信消息
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年7月3日 下午10:28:06
- * @version 1.0
- *
+
  */
 public class BaseMsg implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private int subMsgType;
 	private int voiceLength;
