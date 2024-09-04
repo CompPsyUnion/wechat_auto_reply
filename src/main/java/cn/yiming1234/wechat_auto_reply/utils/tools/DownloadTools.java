@@ -57,7 +57,6 @@ public class DownloadTools {
 			out.flush();
 			out.close();
 			// Tools.printQr(path);
-
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			return false;
