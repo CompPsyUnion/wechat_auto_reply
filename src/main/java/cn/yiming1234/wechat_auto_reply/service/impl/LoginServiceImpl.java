@@ -41,14 +41,10 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.parameters.LoginParaEnum;
 import cn.yiming1234.wechat_auto_reply.utils.enums.parameters.StatusNotifyParaEnum;
 import cn.yiming1234.wechat_auto_reply.utils.enums.parameters.UUIDParaEnum;
 import cn.yiming1234.wechat_auto_reply.utils.tools.CommonTools;
+import cn.yiming1234.wechat_auto_reply.utils.QRterminal;
 
 /**
- * 登陆服务实现类
- * 
- * @author https://github.com/yaphone
- * @date 创建时间：2017年5月13日 上午12:09:35
- * @version 1.0
- *
+ * 登录服务实现类
  */
 public class LoginServiceImpl implements ILoginService {
 	private static Logger LOG = LoggerFactory.getLogger(LoginServiceImpl.class);
@@ -62,6 +58,9 @@ public class LoginServiceImpl implements ILoginService {
 
 	}
 
+	/**
+	 * 登录
+	 */
 	@Override
 	public boolean login() {
 
@@ -91,16 +90,18 @@ public class LoginServiceImpl implements ILoginService {
 					break;
 				}
 				if (ResultEnum.WAIT_CONFIRM.getCode().equals(status)) {
-					LOG.info("请点击微信确认按钮，进行登陆");
+					LOG.info("请点击微信确认按钮，进行登录");
 				}
-
 			} catch (Exception e) {
-				LOG.error("微信登陆异常！", e);
+				LOG.error("微信登录异常！", e);
 			}
 		}
 		return isLogin;
 	}
 
+	/**
+	 * 获取UUID
+	 */
 	@Override
 	public String getUuid() {
 		// 组装参数和URL
@@ -124,32 +125,37 @@ public class LoginServiceImpl implements ILoginService {
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
 		}
-
 		return core.getUuid();
 	}
 
+	/**
+	 * 获取二维码
+	 */
 	@Override
 	public boolean getQR(String qrPath) {
-		qrPath = qrPath + File.separator + "QR.jpg";
-		String qrUrl = URLEnum.QRCODE_URL.getUrl() + core.getUuid();
-		HttpEntity entity = myHttpClient.doGet(qrUrl, null, true, null);
+//		qrPath = qrPath + File.separator + "QR.jpg";
+//		String qrUrl = URLEnum.QRCODE_URL.getUrl() + core.getUuid();
+//		HttpEntity entity = myHttpClient.doGet(qrUrl, null, true, null);
 		try {
-			OutputStream out = new FileOutputStream(qrPath);
-			byte[] bytes = EntityUtils.toByteArray(entity);
-			out.write(bytes);
-			out.flush();
-			out.close();
-			try {
-				CommonTools.printQr(qrPath); // 打开登陆二维码图片
-			} catch (Exception e) {
-				LOG.info(e.getMessage());
-			}
+//			OutputStream out = new FileOutputStream(qrPath);
+//			byte[] bytes = EntityUtils.toByteArray(entity);
+//			out.write(bytes);
+//			out.flush();
+//			out.close();
+
+//			try {
+//				CommonTools.printQr(qrPath); // 打开登录二维码图片
+//			} catch (Exception e) {
+//				LOG.info(e.getMessage());
+//			}
+			String qrUrl2 = URLEnum.cAPI_qrcode.getUrl() + core.getUuid();
+			String qrString= QRterminal.getQr(qrUrl2);
+			LOG.error(System.lineSeparator() + qrString);
 
 		} catch (Exception e) {
 			LOG.info(e.getMessage());
 			return false;
 		}
-
 		return true;
 	}
 
@@ -260,7 +266,7 @@ public class LoginServiceImpl implements ILoginService {
 						} else if (retcode.equals(RetCodeEnum.LOGIN_OUT.getCode())) { // 退出
 							LOG.info(RetCodeEnum.LOGIN_OUT.getType());
 							break;
-						} else if (retcode.equals(RetCodeEnum.LOGIN_OTHERWHERE.getCode())) { // 其它地方登陆
+						} else if (retcode.equals(RetCodeEnum.LOGIN_OTHERWHERE.getCode())) { // 其它地方登录
 							LOG.info(RetCodeEnum.LOGIN_OTHERWHERE.getType());
 							break;
 						} else if (retcode.equals(RetCodeEnum.MOBILE_LOGIN_OUT.getCode())) { // 移动端退出
@@ -432,10 +438,7 @@ public class LoginServiceImpl implements ILoginService {
 	}
 
 	/**
-	 * 检查登陆状态
-	 *
-	 * @param result
-	 * @return
+	 * 检查登录状态
 	 */
 	public String checklogin(String result) {
 		String regEx = "window.code=(\\d+)";
@@ -447,11 +450,7 @@ public class LoginServiceImpl implements ILoginService {
 	}
 
 	/**
-	 * 处理登陆信息
-	 *
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月9日 下午12:16:26
-	 * @param result
+	 * 处理登录信息
 	 */
 	private void processLoginInfo(String loginContent) {
 		String regEx = "window.redirect_uri=\"(\\S+)\";";
@@ -496,7 +495,6 @@ public class LoginServiceImpl implements ILoginService {
 				LOG.info(e.getMessage());
 				return;
 			}
-			//add by 默非默 2017-08-01 22:28:09
 			//如果登录被禁止时，则登录返回的message内容不为空，下面代码则判断登录内容是否为空，不为空则退出程序
 			String msg = getLoginMessage(text);
 			if (!"".equals(msg)){
@@ -525,9 +523,6 @@ public class LoginServiceImpl implements ILoginService {
 	private Map<String, List<String>> getPossibleUrlMap() {
 		Map<String, List<String>> possibleUrlMap = new HashMap<String, List<String>>();
 		possibleUrlMap.put("wx.qq.com", new ArrayList<String>() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			{
@@ -537,9 +532,6 @@ public class LoginServiceImpl implements ILoginService {
 		});
 
 		possibleUrlMap.put("wx2.qq.com", new ArrayList<String>() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			{
@@ -548,9 +540,6 @@ public class LoginServiceImpl implements ILoginService {
 			}
 		});
 		possibleUrlMap.put("wx8.qq.com", new ArrayList<String>() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			{
@@ -560,9 +549,6 @@ public class LoginServiceImpl implements ILoginService {
 		});
 
 		possibleUrlMap.put("web2.wechat.com", new ArrayList<String>() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			{
@@ -571,9 +557,6 @@ public class LoginServiceImpl implements ILoginService {
 			}
 		});
 		possibleUrlMap.put("wechat.com", new ArrayList<String>() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			{

@@ -41,7 +41,7 @@ public class Core {
 	private String nickName;
 	private List<BaseMsg> msgList = new ArrayList<BaseMsg>();
 
-	private JSONObject userSelf; // 登陆账号自身信息
+	private JSONObject userSelf; // 登录账号自身信息
 	private List<JSONObject> memberList = new ArrayList<JSONObject>(); // 好友+群聊+公众号+特殊账号
 	private List<JSONObject> contactList = new ArrayList<JSONObject>();// 好友
 	private List<JSONObject> groupList = new ArrayList<JSONObject>();; // 群
