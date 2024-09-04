@@ -15,7 +15,7 @@ public class Wechat {
 		System.setProperty("jsse.enableSNIExtension", "false"); // 防止SSL错误
 		this.msgHandler = msgHandler;
 
-		// 登陆
+		// 登录
 		LoginController login = new LoginController();
 		login.login(qrPath);
 	}

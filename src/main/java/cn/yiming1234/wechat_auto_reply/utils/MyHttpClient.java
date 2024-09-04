@@ -54,10 +54,6 @@ public class MyHttpClient {
 
 	}
 
-	private MyHttpClient() {
-
-	}
-
 	/**
 	 * 获取cookies
 	 */
@@ -72,11 +68,15 @@ public class MyHttpClient {
 		return instance;
 	}
 
+	private MyHttpClient() {
+
+	}
+
 	/**
 	 * 处理GET请求
 	 */
 	public HttpEntity doGet(String url, List<BasicNameValuePair> params, boolean redirect,
-			Map<String, String> headerMap) {
+							Map<String, String> headerMap) {
 		HttpEntity entity = null;
 		HttpGet httpGet = new HttpGet();
 
@@ -132,6 +132,24 @@ public class MyHttpClient {
 	}
 
 	/**
+	 * 处理POST请求
+	 */
+	public HttpEntity doPost(String url, String json, Map<String, String> headers) throws Exception {
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost(url);
+		StringEntity entity = new StringEntity(json, "UTF-8");
+		httpPost.setEntity(entity);
+
+		// Set headers
+		for (Map.Entry<String, String> entry : headers.entrySet()) {
+			httpPost.setHeader(entry.getKey(), entry.getValue());
+		}
+
+		CloseableHttpResponse response = httpClient.execute(httpPost);
+		return response.getEntity();
+	}
+
+	/**
 	 * 上传文件到服务器
 	 */
 	public HttpEntity doPostFile(String url, HttpEntity reqEntity) {
@@ -149,6 +167,9 @@ public class MyHttpClient {
 		return entity;
 	}
 
+	/*
+	 * 获取httpClient
+	 */
 	public static CloseableHttpClient getHttpClient() {
 		return httpClient;
 	}

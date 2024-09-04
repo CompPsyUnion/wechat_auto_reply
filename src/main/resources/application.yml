@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+
+server:
+    port: 8080
+
+yiming1234:
+  linkai:
+    app_code: ${yiming1234.linkai.app_code}
+    api_key: ${yiming1234.linkai.api_key}

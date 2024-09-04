@@ -7,3 +7,5 @@
 *.iml
 
 /bin/
+
+/src/main/resources/application-dev.yml
