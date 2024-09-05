@@ -31,10 +31,10 @@ jobs:
         servers: ''
 
     - name: Build with Maven
-      run: mvn package -B -DskipTests --file backend/pom.xml
+      run: mvn package -B -DskipTests --file ./pom.xml
 
     - name: GH Release
       uses: softprops/action-gh-release@v2
       with:
-        files: backend/wall-server/target/wall-server-*.jar
+        files: ./target/wall-server-*.jar
         tag_name: wechat_auto_reply-v1.0
