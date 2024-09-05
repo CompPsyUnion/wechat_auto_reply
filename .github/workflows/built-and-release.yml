@@ -1,6 +1,7 @@
 name: SpringBoot Built and Release
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
