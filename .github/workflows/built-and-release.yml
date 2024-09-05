@@ -1,0 +1,35 @@
+name: SpringBoot Built and Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - './**'
+
+jobs:
+  build:
+
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4.2.1
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: maven-settings-xml-action
+      uses: whelk-io/maven-settings-xml-action@v20
+      with:
+        repositories: ''
+        servers: ''
+    - name: Build with Maven
+      run: mvn package -B -DskipTests --file backend/pom.xml
+    - name: GH Release
+      uses: softprops/action-gh-release@v2.0.6
+      with:
+        files: backend/wall-server/target/wall-server-*.jar
+        tag_name: wechat_auto_reply-v1.0
