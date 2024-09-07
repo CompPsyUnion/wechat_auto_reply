@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -23,9 +22,8 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.URLEnum;
 /**
  * 微信小工具，如获好友列表等
  */
+@Slf4j
 public class WechatTools {
-	private static Logger LOG = LoggerFactory.getLogger(WechatTools.class);
-
 	private static Core core = Core.getInstance();
 
 	/**
@@ -120,7 +118,7 @@ public class WechatTools {
 			String text = EntityUtils.toString(entity, Consts.UTF_8); // 无消息
 			return true;
 		} catch (Exception e) {
-			LOG.debug(e.getMessage());
+			log.debug(e.getMessage());
 		}
 		return false;
 	}
@@ -152,9 +150,9 @@ public class WechatTools {
 			String paramStr = JSON.toJSONString(msgMap);
 			HttpEntity entity = core.getMyHttpClient().doPost(url, paramStr);
 			// String result = EntityUtils.toString(entity, Consts.UTF_8);
-			LOG.info("修改备注" + remName);
+			log.info("修改备注" + remName);
 		} catch (Exception e) {
-			LOG.error("remarkNameByUserName", e);
+			log.error("remarkNameByUserName", e);
 		}
 	}
 

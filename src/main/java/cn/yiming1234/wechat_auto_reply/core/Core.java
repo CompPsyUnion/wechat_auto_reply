@@ -59,7 +59,7 @@ public class Core {
 	String uuid = null;
 
 	boolean useHotReload = false;
-	String hotReloadDir = "itchat.pkl";
+	String hotReloadDir = "wechat_auto_reply.pkl";
 	int receivingRetryCount = 5;
 
 	private long lastNormalRetcodeTime; // 最后一次收到正常retcode的时间，秒为单位

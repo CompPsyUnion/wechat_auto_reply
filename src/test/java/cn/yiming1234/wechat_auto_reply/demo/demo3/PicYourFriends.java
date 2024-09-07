@@ -5,10 +5,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -23,8 +22,8 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.StorageLoginInfoEnum;
 /**
  * 此示例演示如何获取所有好友的头像
  */
+@Slf4j
 public class PicYourFriends implements IMsgHandlerFace {
-	private static Logger LOG = LoggerFactory.getLogger(PicYourFriends.class);
 	private static final Core core = Core.getInstance();
 	private static final MyHttpClient myHttpClient = core.getMyHttpClient();
 	private static final String path = "D://wechat_auto_reply//head"; // 这里需要设置保存头像的路径
@@ -37,7 +36,7 @@ public class PicYourFriends implements IMsgHandlerFace {
 			String baseUrl = "https://" + core.getIndexUrl(); // 基础URL
 			String skey = (String) core.getLoginInfo().get(StorageLoginInfoEnum.skey.getKey());
 			if (text.equals("111")) {
-				LOG.info("开始下载好友头像");
+				log.info("开始下载好友头像");
 				List<JSONObject> friends = WechatTools.getContactList();
 				for (int i = 0; i < friends.size(); i++) {
 					JSONObject friend = friends.get(i);
@@ -54,7 +53,7 @@ public class PicYourFriends implements IMsgHandlerFace {
 						out.close();
 
 					} catch (Exception e) {
-						LOG.info(e.getMessage());
+						log.info(e.getMessage());
 					}
 
 				}
