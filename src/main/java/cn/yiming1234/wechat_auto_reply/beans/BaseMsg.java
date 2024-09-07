@@ -284,4 +284,5 @@ public class BaseMsg implements Serializable {
 	public void setFileSize(String fileSize) {
 		this.fileSize = fileSize;
 	}
+
 }

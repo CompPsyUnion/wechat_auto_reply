@@ -11,6 +11,7 @@ import java.util.Random;
 
 import javax.activation.MimetypesFileTypeMap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
@@ -36,8 +37,9 @@ import cn.yiming1234.wechat_auto_reply.utils.enums.VerifyFriendEnum;
 /**
  * 消息处理工具类
  */
+
+@Slf4j
 public class MessageTools {
-	private static Logger LOG = LoggerFactory.getLogger(MessageTools.class);
 	private static Core core = Core.getInstance();
 	private static MyHttpClient myHttpClient = core.getMyHttpClient();
 
@@ -48,7 +50,7 @@ public class MessageTools {
 		if (text == null) {
 			return;
 		}
-		LOG.info(String.format("发送消息 %s: %s", toUserName, text));
+		log.info(String.format("发送消息 %s: %s", toUserName, text));
 		webWxSendMsg(1, text, toUserName);
 	}
 
@@ -97,7 +99,7 @@ public class MessageTools {
 			HttpEntity entity = myHttpClient.doPost(url, paramStr);
 			EntityUtils.toString(entity, Consts.UTF_8);
 		} catch (Exception e) {
-			LOG.error("webWxSendMsg", e);
+			log.error("webWxSendMsg", e);
 		}
 	}
 
@@ -107,7 +109,7 @@ public class MessageTools {
 	private static JSONObject webWxUploadMedia(String filePath) {
 		File f = new File(filePath);
 		if (!f.exists() && f.isFile()) {
-			LOG.info("file is not exist");
+			log.info("file is not exist");
 			return null;
 		}
 		String url = String.format(URLEnum.WEB_WX_UPLOAD_MEDIA.getUrl(), core.getLoginInfo().get("fileUrl"));
@@ -125,7 +127,7 @@ public class MessageTools {
 				+ String.valueOf(new Random().nextLong()).substring(0, 4);
 		String webwxDataTicket = MyHttpClient.getCookie("webwx_data_ticket");
 		if (webwxDataTicket == null) {
-			LOG.error("get cookie webwx_data_ticket error");
+			log.error("get cookie webwx_data_ticket error");
 			return null;
 		}
 
@@ -157,7 +159,7 @@ public class MessageTools {
 				String result = EntityUtils.toString(entity, Consts.UTF_8);
 				return JSON.parseObject(result);
 			} catch (Exception e) {
-				LOG.error("webWxUploadMedia 错误： ", e);
+				log.error("webWxUploadMedia 错误： ", e);
 			}
 		}
 		return null;
@@ -213,7 +215,7 @@ public class MessageTools {
 				String result = EntityUtils.toString(entity, Consts.UTF_8);
 				return JSON.parseObject(result).getJSONObject("BaseResponse").getInteger("Ret") == 0;
 			} catch (Exception e) {
-				LOG.error("webWxSendMsgImg 错误： ", e);
+				log.error("webWxSendMsgImg 错误： ", e);
 			}
 		}
 		return false;
@@ -237,7 +239,7 @@ public class MessageTools {
 			data.put("totallen", responseObj.getString("StartPos"));
 			data.put("attachid", responseObj.getString("MediaId"));
 		} else {
-			LOG.error("sednFileMsgByUserId 错误: ", data);
+			log.error("sednFileMsgByUserId 错误: ", data);
 		}
 		return webWxSendAppMsg(userId, data);
 	}
@@ -291,7 +293,7 @@ public class MessageTools {
 				String result = EntityUtils.toString(entity, Consts.UTF_8);
 				return JSON.parseObject(result).getJSONObject("BaseResponse").getInteger("Ret") == 0;
 			} catch (Exception e) {
-				LOG.error("错误: ", e);
+				log.error("错误: ", e);
 			}
 		}
 		return false;
@@ -340,14 +342,14 @@ public class MessageTools {
 			HttpEntity entity = myHttpClient.doPost(url, paramStr);
 			result = EntityUtils.toString(entity, Consts.UTF_8);
 		} catch (Exception e) {
-			LOG.error("webWxSendMsg", e);
+			log.error("webWxSendMsg", e);
 		}
 
 		if (StringUtils.isBlank(result)) {
-			LOG.error("被动添加好友失败");
+			log.error("被动添加好友失败");
 		}
 
-		LOG.debug(result);
+		log.debug(result);
 
 	}
 

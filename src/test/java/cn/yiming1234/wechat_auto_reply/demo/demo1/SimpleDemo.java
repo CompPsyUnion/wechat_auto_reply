@@ -4,8 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import cn.yiming1234.wechat_auto_reply.api.MessageTools;
 import cn.yiming1234.wechat_auto_reply.api.WechatTools;
@@ -19,9 +18,12 @@ import cn.yiming1234.wechat_auto_reply.utils.tools.DownloadTools;
 /**
  * 简单示例程序，收到文本信息自动回复原信息，收到图片、语音、小视频后根据路径自动保存
  */
+@Slf4j
 public class SimpleDemo implements IMsgHandlerFace {
-	private static final Logger LOG = LoggerFactory.getLogger(SimpleDemo.class);
 
+	/**
+	 * 消息处理
+	 */
 	@Override
 	public String textMsgHandle(BaseMsg msg) {
 		// String docFilePath = "D:/wechat_auto_reply/pic/1.jpg"; // 这里是需要发送的文件的路径
@@ -30,7 +32,7 @@ public class SimpleDemo implements IMsgHandlerFace {
 			// MessageTools.sendFileMsgByUserId(userId, docFilePath); // 发送文件
 			// MessageTools.sendPicMsgByUserId(userId, docFilePath);
 			String text = msg.getText(); // 发送文本消息，也可调用MessageTools.sendFileMsgByUserId(userId,text);
-			LOG.info(text);
+			log.info(text);
 			if (text.equals("111")) {
 				WechatTools.logout();
 			}
@@ -47,6 +49,9 @@ public class SimpleDemo implements IMsgHandlerFace {
 		return null;
 	}
 
+	/**
+	 * 处理图片消息
+	 */
 	@Override
 	public String picMsgHandle(BaseMsg msg) {
 		String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());// 这里使用收到图片的时间作为文件名
@@ -55,6 +60,9 @@ public class SimpleDemo implements IMsgHandlerFace {
 		return "图片保存成功";
 	}
 
+	/**
+	 * 处理声音消息
+	 */
 	@Override
 	public String voiceMsgHandle(BaseMsg msg) {
 		String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
@@ -63,6 +71,9 @@ public class SimpleDemo implements IMsgHandlerFace {
 		return "声音保存成功";
 	}
 
+	/**
+	 * 处理小视频消息
+	 */
 	@Override
 	public String viedoMsgHandle(BaseMsg msg) {
 		String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
@@ -71,17 +82,26 @@ public class SimpleDemo implements IMsgHandlerFace {
 		return "视频保存成功";
 	}
 
+	/**
+	 * 处理名片消息
+	 */
 	@Override
 	public String nameCardMsgHandle(BaseMsg msg) {
 		return "收到名片消息";
 	}
 
+	/**
+	 * 处理系统消息
+	 */
 	@Override
 	public void sysMsgHandle(BaseMsg msg) { // 收到系统消息
 		String text = msg.getContent();
-		LOG.info(text);
+		log.info(text);
 	}
 
+	/**
+	 * 收到请求添加好友消息
+	 */
 	@Override
 	public String verifyAddFriendMsgHandle(BaseMsg msg) {
 		MessageTools.addFriend(msg, true); // 同意好友请求，false为不接受好友请求
@@ -93,6 +113,9 @@ public class SimpleDemo implements IMsgHandlerFace {
 		return text;
 	}
 
+	/**
+	 * 收到请求添加群消息
+	 */
 	@Override
 	public String mediaMsgHandle(BaseMsg msg) {
 		String fileName = msg.getFileName();

@@ -1,8 +1,5 @@
 package cn.yiming1234.wechat_auto_reply.service.impl;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,12 +10,11 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.regex.Matcher;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import com.alibaba.fastjson.JSON;
@@ -46,17 +42,14 @@ import cn.yiming1234.wechat_auto_reply.utils.QRterminal;
 /**
  * 登录服务实现类
  */
+@Slf4j
 public class LoginServiceImpl implements ILoginService {
-	private static Logger LOG = LoggerFactory.getLogger(LoginServiceImpl.class);
 
 	private Core core = Core.getInstance();
 	private MyHttpClient httpClient = core.getMyHttpClient();
-
 	private MyHttpClient myHttpClient = core.getMyHttpClient();
 
-	public LoginServiceImpl() {
-
-	}
+	public LoginServiceImpl() {}
 
 	/**
 	 * 登录
@@ -90,10 +83,10 @@ public class LoginServiceImpl implements ILoginService {
 					break;
 				}
 				if (ResultEnum.WAIT_CONFIRM.getCode().equals(status)) {
-					LOG.info("请点击微信确认按钮，进行登录");
+					log.info("请点击微信确认按钮，进行登录");
 				}
 			} catch (Exception e) {
-				LOG.error("微信登录异常！", e);
+				log.error("微信登录异常！", e);
 			}
 		}
 		return isLogin;
@@ -123,7 +116,7 @@ public class LoginServiceImpl implements ILoginService {
 				}
 			}
 		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return core.getUuid();
 	}
@@ -146,14 +139,14 @@ public class LoginServiceImpl implements ILoginService {
 //			try {
 //				CommonTools.printQr(qrPath); // 打开登录二维码图片
 //			} catch (Exception e) {
-//				LOG.info(e.getMessage());
+//				log.info(e.getMessage());
 //			}
 			String qrUrl2 = URLEnum.cAPI_qrcode.getUrl() + core.getUuid();
 			String qrString= QRterminal.getQr(qrUrl2);
-			LOG.error(System.lineSeparator() + qrString);
+			log.info(System.lineSeparator() + qrString);
 
 		} catch (Exception e) {
-			LOG.info(e.getMessage());
+			log.info(e.getMessage());
 			return false;
 		}
 		return true;
@@ -241,7 +234,7 @@ public class LoginServiceImpl implements ILoginService {
 			HttpEntity entity = httpClient.doPost(url, paramStr);
 			EntityUtils.toString(entity, Consts.UTF_8);
 		} catch (Exception e) {
-			LOG.error("微信状态通知接口失败！", e);
+			log.error("微信状态通知接口失败！", e);
 		}
 
 	}
@@ -257,20 +250,20 @@ public class LoginServiceImpl implements ILoginService {
 				while (core.isAlive()) {
 					try {
 						Map<String, String> resultMap = syncCheck();
-						LOG.info(JSONObject.toJSONString(resultMap));
+						log.info(JSONObject.toJSONString(resultMap));
 						String retcode = resultMap.get("retcode");
 						String selector = resultMap.get("selector");
 						if (retcode.equals(RetCodeEnum.UNKOWN.getCode())) {
-							LOG.info(RetCodeEnum.UNKOWN.getType());
+							log.info(RetCodeEnum.UNKOWN.getType());
 							continue;
 						} else if (retcode.equals(RetCodeEnum.LOGIN_OUT.getCode())) { // 退出
-							LOG.info(RetCodeEnum.LOGIN_OUT.getType());
+							log.info(RetCodeEnum.LOGIN_OUT.getType());
 							break;
 						} else if (retcode.equals(RetCodeEnum.LOGIN_OTHERWHERE.getCode())) { // 其它地方登录
-							LOG.info(RetCodeEnum.LOGIN_OTHERWHERE.getType());
+							log.info(RetCodeEnum.LOGIN_OTHERWHERE.getType());
 							break;
 						} else if (retcode.equals(RetCodeEnum.MOBILE_LOGIN_OUT.getCode())) { // 移动端退出
-							LOG.info(RetCodeEnum.MOBILE_LOGIN_OUT.getType());
+							log.info(RetCodeEnum.MOBILE_LOGIN_OUT.getType());
 							break;
 						} else if (retcode.equals(RetCodeEnum.NORMAL.getCode())) {
 							core.setLastNormalRetcodeTime(System.currentTimeMillis()); // 最后收到正常报文时间
@@ -287,7 +280,7 @@ public class LoginServiceImpl implements ILoginService {
 											core.getMsgList().add(baseMsg);
 										}
 									} catch (Exception e) {
-										LOG.info(e.getMessage());
+										log.info(e.getMessage());
 									}
 								}
 							} else if (selector.equals("7")) {
@@ -309,7 +302,7 @@ public class LoginServiceImpl implements ILoginService {
 											core.getContactList().add(userInfo);
 										}
 									} catch (Exception e) {
-										LOG.info(e.getMessage());
+										log.info(e.getMessage());
 									}
 								}
 
@@ -318,7 +311,7 @@ public class LoginServiceImpl implements ILoginService {
 							JSONObject obj = webWxSync();
 						}
 					} catch (Exception e) {
-						LOG.info(e.getMessage());
+						log.info(e.getMessage());
 						retryCount += 1;
 						if (core.getReceivingRetryCount() < retryCount) {
 							core.setAlive(false);
@@ -326,7 +319,7 @@ public class LoginServiceImpl implements ILoginService {
 							try {
 								Thread.sleep(1000);
 							} catch (InterruptedException e1) {
-								LOG.info(e.getMessage());
+								log.info(e.getMessage());
 							}
 						}
 					}
@@ -399,7 +392,7 @@ public class LoginServiceImpl implements ILoginService {
 			}
 			return;
 		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return;
 	}
@@ -433,7 +426,7 @@ public class LoginServiceImpl implements ILoginService {
 				}
 			}
 		} catch (Exception e) {
-			LOG.info(e.getMessage());
+			log.info(e.getMessage());
 		}
 	}
 
@@ -492,13 +485,13 @@ public class LoginServiceImpl implements ILoginService {
 				HttpEntity entity = myHttpClient.doGet(originalUrl, null, false, header);
 				text = EntityUtils.toString(entity);
 			} catch (Exception e) {
-				LOG.info(e.getMessage());
+				log.info(e.getMessage());
 				return;
 			}
 			//如果登录被禁止时，则登录返回的message内容不为空，下面代码则判断登录内容是否为空，不为空则退出程序
 			String msg = getLoginMessage(text);
 			if (!"".equals(msg)){
-				LOG.info(msg);
+				log.info(msg);
 				System.exit(0);
 			}
 			Document doc = CommonTools.xmlParser(text);
@@ -569,10 +562,6 @@ public class LoginServiceImpl implements ILoginService {
 
 	/**
 	 * 同步消息 sync the messages
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年5月12日 上午12:24:55
-	 * @return
 	 */
 	private JSONObject webWxSync() {
 		JSONObject result = null;
@@ -606,7 +595,7 @@ public class LoginServiceImpl implements ILoginService {
 						synckey.substring(0, synckey.length() - 1));// 1_656161336|2_656161626|3_656161313|11_656159955|13_656120033|201_1492273724|1000_1492265953|1001_1492250432|1004_1491805192
 			}
 		} catch (Exception e) {
-			LOG.info(e.getMessage());
+			log.info(e.getMessage());
 		}
 		return result;
 
@@ -614,11 +603,6 @@ public class LoginServiceImpl implements ILoginService {
 
 	/**
 	 * 检查是否有新消息 check whether there's a message
-	 * 
-	 * @author https://github.com/yaphone
-	 * @date 2017年4月16日 上午11:11:34
-	 * @return
-	 * 
 	 */
 	private Map<String, String> syncCheck() {
 		Map<String, String> resultMap = new HashMap<String, String>();
@@ -644,7 +628,7 @@ public class LoginServiceImpl implements ILoginService {
 			String regEx = "window.synccheck=\\{retcode:\"(\\d+)\",selector:\"(\\d+)\"\\}";
 			Matcher matcher = CommonTools.getMatcher(regEx, text);
 			if (!matcher.find() || matcher.group(1).equals("2")) {
-				LOG.info(String.format("Unexpected sync check result: %s", text));
+				log.info(String.format("Unexpected sync check result: %s", text));
 			} else {
 				resultMap.put("retcode", matcher.group(1));
 				resultMap.put("selector", matcher.group(2));
@@ -657,8 +641,6 @@ public class LoginServiceImpl implements ILoginService {
 
 	/**
 	 * 解析登录返回的消息，如果成功登录，则message为空
-	 * @param result
-	 * @return
 	 */
 	public String getLoginMessage(String result){
 		String[] strArr = result.split("<message>");

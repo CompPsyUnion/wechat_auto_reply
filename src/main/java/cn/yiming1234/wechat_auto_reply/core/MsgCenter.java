@@ -3,9 +3,6 @@ package cn.yiming1234.wechat_auto_reply.core;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -15,13 +12,13 @@ import cn.yiming1234.wechat_auto_reply.face.IMsgHandlerFace;
 import cn.yiming1234.wechat_auto_reply.utils.enums.MsgCodeEnum;
 import cn.yiming1234.wechat_auto_reply.utils.enums.MsgTypeEnum;
 import cn.yiming1234.wechat_auto_reply.utils.tools.CommonTools;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 消息处理中心
  */
+@Slf4j
 public class MsgCenter {
-	private static Logger LOG = LoggerFactory.getLogger(MsgCenter.class);
-
 	private static Core core = Core.getInstance();
 
 	/**
@@ -94,9 +91,9 @@ public class MsgCenter {
 			} else if (m.getInteger("MsgType").equals(MsgCodeEnum.MSGTYPE_RECALLED.getCode())) { // 撤回消息
 
 			} else {
-				LOG.info("Useless msg");
+				log.info("Useless msg");
 			}
-			LOG.info("收到消息一条，来自: " + m.getString("FromUserName"));
+			log.info("收到消息一条，来自: " + m.getString("FromUserName"));
 			result.add(m);
 		}
 		return result;

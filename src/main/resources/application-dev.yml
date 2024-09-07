@@ -2,3 +2,7 @@ yiming1234:
   linkai:
     app_code: Rv4Hm0Dm
     api_key: Link_eO2ckvsw5U3QHefRmKFRNp4QeEQhlnYth0agPLm70Z
+
+  wechat:
+    group-names: ["一群废"]
+    usernames: ["自由的世界人"]

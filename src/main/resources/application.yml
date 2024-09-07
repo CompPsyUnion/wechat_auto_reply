@@ -9,3 +9,7 @@ yiming1234:
   linkai:
     app_code: ${yiming1234.linkai.app_code}
     api_key: ${yiming1234.linkai.api_key}
+
+  wechat:
+    group-names: ${yiming1234.wechat.group-names}
+    usernames: ${yiming1234.wechat.usernames}
