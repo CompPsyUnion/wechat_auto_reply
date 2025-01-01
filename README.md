@@ -21,7 +21,3 @@ git项目后用IDEA打开后挑选一个启动项启动
 个人以及群聊聊天关键词回复（需要自行定义关键词以及回复内容）
 
 个人聊天LinkAI模型回复（需要自行补充密钥）
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=CompPsyUnion/wechat_auto_reply&type=Date)](https://star-history.com/#CompPsyUnion/wechat_auto_reply&Date)
